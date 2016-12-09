@@ -23,7 +23,9 @@ import de.dhbw.stuttgart.swe2.bibliothek.jpa.AusleihinformationJPA;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.AusleihobjektJPA;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.BibliothekJPA;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.MitarbeiterJPA;
+import de.dhbw.stuttgart.swe2.bibliothek.jpa.ObjektinformationJPA;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.test.PersistenceTest;
+import de.dhbw.stuttgart.swe2.javadsl2.Select;
 import de.dhbw.stuttgart.swe2.javadsl2.ToMany;
 
 import static de.dhbw.stuttgart.swe2.javadsl2.FromServiceImpl.from;
@@ -36,15 +38,15 @@ from(Bibliothek.class).join(ausleihobjekte).join(ausleihinfos).filter(...).selec
 "Select bib from Bibliothek bib join bib.ausleihobjekte ao join ao.ausleihinfos where ... "
 
 
-from(BibliothekJPA.class).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).filter(name.equals(Max)).get();
+from(BibliothekJPA.class).join(ausleihobjekte()).filter(name.equals(Obj)).join(ausleihinfos()).join(mitarbeiter()).filter(name.equals(Max)).select(Mitarbeiter).get();
 
-"select abc from BIBLIOTHEK abc join abc.ausleihobjekte ao join ao.ausleihinfos ai join ai.mitarbeiter mi where mi.name = 'Max'";
+"select mi from BIBLIOTHEK abc join abc.ausleihobjekte ao join ao.ausleihinfos ai join ai.mitarbeiter mi where mi.name = 'Max' AND ao.name = 'Obj";
 
 */
 
 
 public class DslTest {
-	
+
 	//private static final String PERSISTENCE_UNIT_NAME = "derby-embedded-inmemory";
 	//private static final String PERSISTENCE_UNIT_NAME = "derby-network";
 	private static final String PERSISTENCE_UNIT_NAME = "derby-bib";
@@ -76,6 +78,12 @@ public class DslTest {
 		public String getEntityKey() {
 			return "ao";
 		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 	
 	//Ausleihobjekt zu Ausleihinfo
@@ -100,6 +108,43 @@ public class DslTest {
 		@Override
 		public String getEntityKey() {
 			return "ai";
+		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+	
+	//Ausleihobjekt zu Ausleihinfo
+	private static final AusleihobjektToObjektinformation AUSLEIHOBJEKT_TO_OBJEKTINFORMATION = new AusleihobjektToObjektinformation();
+
+	private static ToMany<AusleihobjektJPA, ObjektinformationJPA> objektinfo() {
+		return AUSLEIHOBJEKT_TO_OBJEKTINFORMATION;
+	}
+
+	private static class AusleihobjektToObjektinformation implements ToMany<AusleihobjektJPA, ObjektinformationJPA> {
+
+		@Override
+		public String get() {
+			return "";
+		}
+		
+		@Override
+		public String getEntityName() {
+			return "objektinfo";
+		}
+		
+		@Override
+		public String getEntityKey() {
+			return "oi";
+		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 	
@@ -126,12 +171,18 @@ public class DslTest {
 		public String getEntityKey() {
 			return "mi";
 		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 	
 	
 	@BeforeClass
 	public static void setup() {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		//factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	}
 	
 	/*
@@ -166,10 +217,12 @@ public class DslTest {
 
 	@Test
 	public void test() {
-		String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).get();
+		//String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).get(Select.BIBLIOTHEK);
+		//String jpaStmt2 = from(BibliothekJPA.class).join(ausleihobjekte()).join(objektinfo()).get();
+		String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).get(Select.AUSLEIHOBJEKT);
 
 		// JPA Statement testen
-		
+		/*
 		EntityManager entityManager = factory.createEntityManager();
 		try {
 			TypedQuery<Bibliothek> query = entityManager.createQuery(jpaStmt, Bibliothek.class);
@@ -186,7 +239,7 @@ public class DslTest {
 		} finally {
 			entityManager.close();
 		}
-		
+		*/
 		System.out.println(jpaStmt);
 	}
 }

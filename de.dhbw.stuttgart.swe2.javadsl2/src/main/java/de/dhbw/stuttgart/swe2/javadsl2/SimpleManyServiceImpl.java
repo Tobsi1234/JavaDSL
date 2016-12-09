@@ -24,6 +24,21 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 	public String get() {
 		return "select abc from " + this.getObj1() + " join " + this.getJoinObjekte().get(0);
 	}
+	
+	@Override
+	public String get(Select select) {
+		String selectEntityName = select.getEntityName();
+		boolean selectExists = false;
+		for(String entityName : this.getJoinKeys()) {
+			if(entityName.equals(selectEntityName)) {
+				selectExists = true;
+			}
+		}
+		if(!selectExists) {
+			selectEntityName = "abc"; //either it's the from-Entity or it's not there, anyway...
+		}
+		return "select " + selectEntityName + " from " + this.getObj1() + " join " + this.getJoinObjekte().get(0);
+	}
 
 	@Override
 	public <NextOutput> ManyService<Input, NextOutput> join(ManyService<Output, NextOutput> toMany) {
@@ -76,5 +91,4 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

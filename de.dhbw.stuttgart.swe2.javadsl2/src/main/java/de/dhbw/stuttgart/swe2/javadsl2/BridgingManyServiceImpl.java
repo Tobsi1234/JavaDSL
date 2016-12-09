@@ -43,7 +43,25 @@ public class BridgingManyServiceImpl<Input, Bridged, Output> implements ManyServ
 		for(String objekt : getJoinObjekte()) {
 			output += " join " + objekt;
 		}
-		//return "select abc from " + this.getObj1() + " join " + this.getJoinObjekte().get(0);
+		return output;
+	}
+	
+	@Override
+	public String get(Select select) {
+		String selectEntityName = select.getEntityName();
+		boolean selectExists = false;
+		for(String entityName : this.getJoinKeys()) {
+			if(entityName.equals(selectEntityName)) {
+				selectExists = true;
+			}
+		}
+		if(!selectExists) {
+			selectEntityName = "abc"; //either it's the from-Entity or it's not there, anyway...
+		}
+		String output = "select " + selectEntityName + " from " + this.getObj1();
+		for(String objekt : getJoinObjekte()) {
+			output += " join " + objekt;
+		}
 		return output;
 	}
 
