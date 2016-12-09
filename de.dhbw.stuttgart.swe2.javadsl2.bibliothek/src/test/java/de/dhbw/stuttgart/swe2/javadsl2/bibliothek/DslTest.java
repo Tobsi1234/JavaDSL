@@ -3,6 +3,9 @@ package de.dhbw.stuttgart.swe2.javadsl2.bibliothek;
 //import static de.dhbw.stuttgart.swe2.javadsl2.bibliothek.Dsl.from;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -14,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.dhbw.stuttgart.swe2.bibliothek.Bibliothek;
+import de.dhbw.stuttgart.swe2.bibliothek.Mitarbeiter;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.AbstractIdentifiable;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.AusleihinformationJPA;
 import de.dhbw.stuttgart.swe2.bibliothek.jpa.AusleihobjektJPA;
@@ -30,6 +34,12 @@ import static de.dhbw.stuttgart.swe2.javadsl2.FromServiceImpl.from;
 from(Bibliothek.class).join(ausleihobjekte).join(ausleihinfos).filter(...).select(Bibliothek.class).get();
 
 "Select bib from Bibliothek bib join bib.ausleihobjekte ao join ao.ausleihinfos where ... "
+
+
+from(BibliothekJPA.class).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).filter(name.equals(Max)).get();
+
+"select abc from BIBLIOTHEK abc join abc.ausleihobjekte ao join ao.ausleihinfos ai join ai.mitarbeiter mi where mi.name = 'Max'";
+
 */
 
 
@@ -93,7 +103,7 @@ public class DslTest {
 		}
 	}
 	
-	//Ausleihobjekt zu Ausleihinfo
+	//Ausleihinfo zu Mitarbeiter
 	private static final AusleihinformationToMitarbeiter AUSLEIHINFORMATION_TO_MITARBEITER = new AusleihinformationToMitarbeiter();
 
 	private static ToMany<AusleihinformationJPA, MitarbeiterJPA> mitarbeiter() {
@@ -121,7 +131,7 @@ public class DslTest {
 	
 	@BeforeClass
 	public static void setup() {
-		//factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	}
 	
 	/*
@@ -129,6 +139,11 @@ public class DslTest {
 	public void persistBib() {
 		BibliothekJPA bib = new BibliothekJPA();
 		bib.setName("Stadtbibliothek");
+		MitarbeiterJPA ma = new MitarbeiterJPA();
+		ma.setName("max");
+		List<Mitarbeiter> mitarbeiter = new ArrayList<>();
+		mitarbeiter.add(ma);
+		bib.setMitarbeiter(mitarbeiter);
 		
 		EntityManager entityManager = factory.createEntityManager();
 		try {
@@ -152,17 +167,18 @@ public class DslTest {
 	@Test
 	public void test() {
 		String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).get();
-		
+
 		// JPA Statement testen
-		/*
+		
 		EntityManager entityManager = factory.createEntityManager();
 		try {
 			TypedQuery<Bibliothek> query = entityManager.createQuery(jpaStmt, Bibliothek.class);
+			//query.setParameter("name", "Max");
 			String result = "";
 
 			if(!query.getResultList().isEmpty()) {
-				int element = query.getResultList().size() - 1;
-				result = query.getResultList().get(element).getName();
+				//int element = query.getResultList().size() - 1;
+				result = query.getResultList().get(0).getName();
 				//System.out.println(result);
 			}
 
@@ -170,7 +186,7 @@ public class DslTest {
 		} finally {
 			entityManager.close();
 		}
-		*/
+		
 		System.out.println(jpaStmt);
 	}
 }
