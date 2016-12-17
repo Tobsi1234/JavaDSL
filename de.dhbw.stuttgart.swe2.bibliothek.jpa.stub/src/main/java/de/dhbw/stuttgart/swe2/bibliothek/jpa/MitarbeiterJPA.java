@@ -17,7 +17,7 @@ public class MitarbeiterJPA extends MenschJPA implements Mitarbeiter {
 	private int personalnr;
 	private double gehalt;
 	
-	@OneToMany(targetEntity = AusleihinformationJPA.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity = AusleihinformationJPA.class, cascade=CascadeType.ALL, mappedBy="mitarbeiter")
 	private List<Ausleihinformation> ausleihinfos;
 
 	@ManyToOne(targetEntity = BibliothekJPA.class, cascade=CascadeType.ALL)

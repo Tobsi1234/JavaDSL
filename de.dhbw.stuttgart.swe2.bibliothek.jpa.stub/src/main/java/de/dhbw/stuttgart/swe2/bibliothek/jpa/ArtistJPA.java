@@ -13,7 +13,7 @@ public class ArtistJPA extends AbstractIdentifiable implements Artist{
 
 	private String name;
 	
-	@ManyToMany(targetEntity = TitelJPA.class)
+	@ManyToMany(targetEntity = TitelJPA.class, mappedBy="artists")
 	private List<Titel> titel;
 
 	@Override

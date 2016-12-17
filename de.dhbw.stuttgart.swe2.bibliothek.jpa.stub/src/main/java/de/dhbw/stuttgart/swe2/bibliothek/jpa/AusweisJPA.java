@@ -13,7 +13,7 @@ import de.dhbw.stuttgart.swe2.bibliothek.Kunde;
 public class AusweisJPA extends AbstractIdentifiable implements Ausweis {
 	private Date gueltigkeit;
 
-	@OneToOne (targetEntity = KundeJPA.class, cascade=CascadeType.ALL)
+	@OneToOne (targetEntity = KundeJPA.class, cascade=CascadeType.ALL, mappedBy="ausweis")
 	private Kunde kunde;
 	
 	@Override

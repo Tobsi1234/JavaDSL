@@ -21,10 +21,10 @@ public class BibliothekJPA extends AbstractIdentifiable implements Bibliothek {
 	private String ort;
 	private String telefonnr;
 
-	@OneToMany(targetEntity = MitarbeiterJPA.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity = MitarbeiterJPA.class, mappedBy="bibliothek")
 	private List<Mitarbeiter> mitarbeiter;
 
-	@ManyToMany(targetEntity = AusleihobjektJPA.class)
+	@ManyToMany(targetEntity = AusleihobjektJPA.class, mappedBy="bibliotheken")
 	private List<Ausleihobjekt> ausleihobjekte;
 
 	@Override

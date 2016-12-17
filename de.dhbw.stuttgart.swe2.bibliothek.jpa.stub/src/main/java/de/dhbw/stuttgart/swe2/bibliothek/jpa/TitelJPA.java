@@ -15,7 +15,7 @@ public class TitelJPA extends AbstractIdentifiable implements Titel {
 	private String name;
 	private int dauer;
 	
-	@ManyToMany(targetEntity = CdJPA.class)
+	@ManyToMany(targetEntity = CdJPA.class, mappedBy="titel")
 	private List<Cd> cds;
 	
 	@ManyToMany(targetEntity = ArtistJPA.class)

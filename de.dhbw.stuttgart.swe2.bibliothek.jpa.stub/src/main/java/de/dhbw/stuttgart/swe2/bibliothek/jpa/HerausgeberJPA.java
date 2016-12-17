@@ -13,7 +13,7 @@ public class HerausgeberJPA extends AbstractIdentifiable implements Herausgeber 
 
 	private String name;
 	
-	@ManyToMany(targetEntity = ObjektinformationJPA.class)
+	@ManyToMany(targetEntity = ObjektinformationJPA.class, mappedBy = "herausgeber")
 	private List<Objektinformation> objektinfos;
 
 	@Override

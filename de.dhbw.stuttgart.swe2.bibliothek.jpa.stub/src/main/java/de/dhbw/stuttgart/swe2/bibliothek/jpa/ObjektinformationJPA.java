@@ -16,7 +16,7 @@ public class ObjektinformationJPA extends AbstractIdentifiable implements Objekt
 
 	private String name;
 
-	@OneToMany (targetEntity = AusleihobjektJPA.class, cascade=CascadeType.ALL)
+	@OneToMany (targetEntity = AusleihobjektJPA.class, mappedBy="objektinformation")
 	private List<Ausleihobjekt> ausleihobjekte;
 	
 	@ManyToMany (targetEntity = HerausgeberJPA.class, cascade=CascadeType.ALL)

@@ -16,7 +16,7 @@ import de.dhbw.stuttgart.swe2.bibliothek.Objektinformation;
 @Entity (name = "AUSLEIHOBJEKT")
 public class AusleihobjektJPA extends AbstractIdentifiable implements Ausleihobjekt {
 
-	@OneToMany(targetEntity = AusleihinformationJPA.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity = AusleihinformationJPA.class, cascade=CascadeType.ALL, mappedBy="ausleihobjekt")
 	private List<Ausleihinformation> ausleihinfos;
 	
 	@ManyToMany(targetEntity = BibliothekJPA.class)

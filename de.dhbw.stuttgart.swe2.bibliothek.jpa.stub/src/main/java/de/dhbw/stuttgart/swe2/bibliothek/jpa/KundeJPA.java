@@ -16,7 +16,7 @@ public class KundeJPA extends MenschJPA implements Kunde {
 
 	private boolean aktiv;
 	
-	@OneToMany (targetEntity = AusleihinformationJPA.class, cascade=CascadeType.ALL)
+	@OneToMany (targetEntity = AusleihinformationJPA.class, cascade=CascadeType.ALL, mappedBy="kunde")
 	private List<Ausleihinformation> ausleihinfos;
 	
 	@OneToOne (targetEntity = AusweisJPA.class, cascade=CascadeType.ALL)
