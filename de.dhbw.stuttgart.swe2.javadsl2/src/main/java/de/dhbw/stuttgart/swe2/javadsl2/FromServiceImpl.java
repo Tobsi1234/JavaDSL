@@ -12,6 +12,7 @@ public class FromServiceImpl<T> implements FromService<T> {
 	private String obj1;
 	private List<String> joinObjekte = new ArrayList<>();
 	private List<String> joinKeys = new ArrayList<>();
+	private List<String> filterStmts = new ArrayList<>();
 
 	
 	public static <T> FromService<T> from() {
@@ -39,9 +40,22 @@ public class FromServiceImpl<T> implements FromService<T> {
 		simpleManyServiceImpl.setObj1(this.obj1);
 		simpleManyServiceImpl.setJoinObjekte(this.joinObjekte);
 		simpleManyServiceImpl.setJoinKeys(this.joinKeys);
+		simpleManyServiceImpl.setFilterStmts(this.filterStmts);
 		return simpleManyServiceImpl;
 	}
+	
+	@Override
+	public <NextOutput> FromService<T> filter(ToMany<T, NextOutput> toMany) {
+		String filterStmt = "abc." + toMany.getAttribute() + " " + toMany.getOperator() + " '" + toMany.getValue() + "'";
+		this.filterStmts.add(filterStmt);
+		FromServiceImpl<T> fromService = new FromServiceImpl<T>();
+		fromService.obj1 = this.obj1;
+		fromService.joinKeys = this.joinKeys;
+		fromService.filterStmts = this.filterStmts;
+		return fromService;
+	}
 
+	
 	@Override
 	public <NextOutput> ManyService<T, NextOutput> join(ManyService<T, NextOutput> manyService) {
 		return new SimpleManyServiceImpl<T, NextOutput>(manyService);
@@ -56,5 +70,4 @@ public class FromServiceImpl<T> implements FromService<T> {
 	public <NextOutput> OneService<T, NextOutput> join(OneService<T, NextOutput> toOne) {
 		return new SimpleOneServiceImpl<T, NextOutput>(toOne);
 	}
-
 }

@@ -8,6 +8,24 @@ public interface ToMany<Input, Output> {
 
 	String getEntityKey();
 
+	/**
+	 * Gibt JPA String zurück. Nach dem "select" steht der Key der übergebenen Entity. 
+	 * Sollte Entity nicht im JPA Statement vorkommen, wird der Key der From-Entity ("abc") genommen.
+	 * 
+	 * @param  select die Entity die selektiert werden soll
+	 * 
+	 * @return		  JPA String
+	 */
 	String get(Select select);
+
+	ToMany<Input, Output> attribute(String attribute);
+
+	ToMany<Input, Output> equals(String value);
+	
+	String getAttribute();
+	
+	String getOperator();
+	
+	String getValue();
 	
 }

@@ -10,5 +10,5 @@ public interface FromService<T> {
 	
 	<NextOutput> OneService<T, NextOutput> join(OneService<T, NextOutput> manyService);
 
-
+	<NextOutput> FromService<T> filter(ToMany<T, NextOutput> toMany);
 }

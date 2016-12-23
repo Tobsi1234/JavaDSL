@@ -13,6 +13,7 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 	private String obj1;
 	private List<String> joinObjekte = new ArrayList<>();
 	private List<String> joinKeys = new ArrayList<>();
+	private List<String> filterStmts = new ArrayList<>();
 
 	private ToMany<Input, Output> toMany;
 
@@ -53,6 +54,21 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 		bridgingManyServiceImpl.setObj1(this.obj1);
 		bridgingManyServiceImpl.setJoinObjekte(this.joinObjekte);
 		bridgingManyServiceImpl.setJoinKeys(this.joinKeys);
+		bridgingManyServiceImpl.setFilterStmts(this.filterStmts);
+		return bridgingManyServiceImpl;
+	}
+	
+
+	@Override
+	public <NextOutput> ManyService<Input, NextOutput> filter(ToMany<Output, NextOutput> toMany) {
+		String filterStmt = toMany.getEntityKey() + "." + toMany.getAttribute() + " " + toMany.getOperator() + " '" + toMany.getValue() + "'";
+		this.filterStmts.add(filterStmt);
+		BridgingManyServiceImpl<Input, Output, NextOutput> bridgingManyServiceImpl = new BridgingManyServiceImpl<Input, Output, NextOutput>(this, toMany);
+		bridgingManyServiceImpl.setObj1(this.obj1);
+		bridgingManyServiceImpl.setJoinObjekte(this.joinObjekte);
+		bridgingManyServiceImpl.setJoinKeys(this.joinKeys);
+		bridgingManyServiceImpl.setFilterStmts(this.filterStmts);
+
 		return bridgingManyServiceImpl;
 	}
 
@@ -79,7 +95,15 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 	public void setJoinKeys(List<String> joinKeys) {
 		this.joinKeys = joinKeys;
 	}
+	
+	public List<String> getFilterStmts() {
+		return filterStmts;
+	}
 
+	public void setFilterStmts(List<String> filterStmts) {
+		this.filterStmts = filterStmts;
+	}
+	
 	@Override
 	public String getEntityName() {
 		// TODO Auto-generated method stub
@@ -91,4 +115,35 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String getAttribute() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getOperator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ToMany<Input, Output> attribute(String attribute) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ToMany<Input, Output> equals(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

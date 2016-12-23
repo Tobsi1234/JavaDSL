@@ -84,6 +84,37 @@ public class DslTest {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public ToMany<BibliothekJPA, AusleihobjektJPA> equals(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getAttribute() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getOperator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getValue() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<BibliothekJPA, AusleihobjektJPA> attribute(String attribute) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	}
 	
 	//Ausleihobjekt zu Ausleihinfo
@@ -115,6 +146,37 @@ public class DslTest {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, AusleihinformationJPA> equals(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getOperator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getValue() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, AusleihinformationJPA> attribute(String attribute) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getAttribute() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	}
 	
 	//Ausleihobjekt zu Ausleihinfo
@@ -146,6 +208,37 @@ public class DslTest {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, ObjektinformationJPA> equals(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getOperator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getValue() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, ObjektinformationJPA> attribute(String attribute) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getAttribute() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	}
 	
 	//Ausleihinfo zu Mitarbeiter
@@ -177,7 +270,256 @@ public class DslTest {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, MitarbeiterJPA> equals(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getOperator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getValue() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, MitarbeiterJPA> attribute(String attribute) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getAttribute() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
+	
+	
+	//filter Mitarbeiter
+	private static final MitarbeiterToMitarbeiter MITARBEITER_TO_MITARBEITER = new MitarbeiterToMitarbeiter();
+
+	private static ToMany<MitarbeiterJPA, MitarbeiterJPA> filterMitarbeiter() {
+		return MITARBEITER_TO_MITARBEITER;
+	}
+
+	private static class MitarbeiterToMitarbeiter implements ToMany<MitarbeiterJPA, MitarbeiterJPA> {
+
+		private String attribute;
+		private String[] attributes = {"personalnummer", "gehalt", "name", "vorname", "straße", "hausnummer", "plz", "ort", "geschlecht"};
+		private String operator;
+		private String value;
+		
+		@Override
+		public String get() {
+			return "";
+		}
+		
+		@Override
+		public String getEntityName() {
+			return "mitarbeiter";
+		}
+		
+		@Override
+		public String getEntityKey() {
+			return "mi";
+		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<MitarbeiterJPA, MitarbeiterJPA> attribute(String attribute) {
+			boolean contains = false;
+			for(String attributeOfList : attributes) {
+				if(attributeOfList.equals(attribute)) contains = true;
+			}
+			if(contains == true) this.attribute = attribute;
+			else {
+				System.out.println("'" + attribute + "' is not possible in Ausleihinformation");
+				System.exit(1);
+			}
+			return this;
+		}
+
+		@Override
+		public ToMany<MitarbeiterJPA, MitarbeiterJPA> equals(String value) {
+			this.operator = "=";
+			this.value = value;
+			return this;
+		}
+
+		@Override
+		public String getAttribute() {
+			return attribute;
+		}
+
+		@Override
+		public String getOperator() {
+			return operator;
+		}
+
+		@Override
+		public String getValue() {
+			return value;
+		}
+	}
+	
+	//filter Ausleihinfo
+	private static final AusleihinformationToAusleihinformation AUSLEIHINFORMATION_TO_AUSLEIHINFORMATION = new AusleihinformationToAusleihinformation();
+
+	private static ToMany<AusleihinformationJPA, AusleihinformationJPA> filterAusleihinfo() {
+		return AUSLEIHINFORMATION_TO_AUSLEIHINFORMATION;
+	}
+
+	private static class AusleihinformationToAusleihinformation implements ToMany<AusleihinformationJPA, AusleihinformationJPA> {
+
+		private String attribute;
+		private String[] attributes = {"ausleihdatum", "planRueckgabe", "rueckgabe", "strafzahlung", "zustand"};
+		private String operator;
+		private String value;
+		
+		@Override
+		public String get() {
+			return "";
+		}
+		
+		@Override
+		public String getEntityName() {
+			return "ausleihinfos";
+		}
+		
+		@Override
+		public String getEntityKey() {
+			return "ai";
+		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, AusleihinformationJPA> attribute(String attribute) {
+			boolean contains = false;
+			for(String attributeOfList : attributes) {
+				if(attributeOfList.equals(attribute)) contains = true;
+			}
+			if(contains == true) this.attribute = attribute;
+			else {
+				System.out.println("'" + attribute + "' is not possible in Ausleihinformation");
+				System.exit(1);
+			}
+			return this;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, AusleihinformationJPA> equals(String value) {
+			this.operator = "=";
+			this.value = value;
+			return this;
+		}
+
+		@Override
+		public String getAttribute() {
+			return attribute;
+		}
+
+		@Override
+		public String getOperator() {
+			return operator;
+		}
+		
+		@Override
+		public String getValue() {
+			return value;
+		}
+	}
+
+	// filter bibliothek
+	private static final BibliothekToBibliothek BIBLIOTHEK_TO_BIBLIOTHEK = new BibliothekToBibliothek();
+
+	private static ToMany<BibliothekJPA, BibliothekJPA> filterBibliothek() {
+		return BIBLIOTHEK_TO_BIBLIOTHEK;
+	}
+
+	private static class BibliothekToBibliothek implements ToMany<BibliothekJPA, BibliothekJPA> {
+
+		private String attribute;
+		private String[] attributes = {"name", "straße", "hausnummer", "plz", "ort", "telefonnummer"};
+		private String operator;
+		private String value;
+		
+		@Override
+		public String get() {
+			return "";
+		}
+		
+		@Override
+		public String getEntityName() {
+			return "bibliothek";
+		}
+		
+		@Override
+		public String getEntityKey() {
+			return "bib";
+		}
+
+		@Override
+		public String get(de.dhbw.stuttgart.swe2.javadsl2.Select select) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<BibliothekJPA, BibliothekJPA> attribute(String attribute) {
+			boolean contains = false;
+			for(String attributeOfList : attributes) {
+				if(attributeOfList.equals(attribute)) contains = true;
+			}
+			if(contains == true) this.attribute = attribute;
+			else {
+				System.out.println("'" + attribute + "' is not possible in Bibliothek");
+				System.exit(1);
+			}
+			return this;
+		}
+
+		@Override
+		public ToMany<BibliothekJPA, BibliothekJPA> equals(String value) {
+			this.operator = "=";
+			this.value = value;
+			return this;
+		}
+
+		@Override
+		public String getAttribute() {
+			return attribute;
+		}
+
+		@Override
+		public String getOperator() {
+			return operator;
+		}
+		
+		@Override
+		public String getValue() {
+			return value;
+		}
+
+	}
+	
 	
 	
 	@BeforeClass
@@ -217,9 +559,11 @@ public class DslTest {
 
 	@Test
 	public void test() {
-		//String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).get(Select.BIBLIOTHEK);
+		String jpaStmt = from(BibliothekJPA.class).filter(filterBibliothek().attribute("name").equals("Stadtbib")).join(ausleihobjekte()).join(ausleihinfos()).filter(filterAusleihinfo().attribute("ausleihdatum").equals("max2")).join(mitarbeiter()).filter(filterMitarbeiter().attribute("name").equals("Max")).get(Select.BIBLIOTHEK);
+		//String jpaStmt = from(BibliothekJPA.class).filter(filterBibliothek().attribute("name").equals("Stadtbib")).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).filter(filterMitarbeiter().attribute("name").equals("Max")).get(Select.BIBLIOTHEK);
+
 		//String jpaStmt2 = from(BibliothekJPA.class).join(ausleihobjekte()).join(objektinfo()).get();
-		String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).get(Select.AUSLEIHOBJEKT);
+		//String jpaStmt = from(BibliothekJPA.class).join(ausleihobjekte()).get(Select.AUSLEIHOBJEKT);
 
 		// JPA Statement testen
 		/*
