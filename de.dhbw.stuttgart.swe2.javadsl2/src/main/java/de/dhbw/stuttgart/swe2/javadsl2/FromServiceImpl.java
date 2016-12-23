@@ -54,20 +54,4 @@ public class FromServiceImpl<T> implements FromService<T> {
 		fromService.filterStmts = this.filterStmts;
 		return fromService;
 	}
-
-	
-	@Override
-	public <NextOutput> ManyService<T, NextOutput> join(ManyService<T, NextOutput> manyService) {
-		return new SimpleManyServiceImpl<T, NextOutput>(manyService);
-	}
-
-	@Override
-	public <NextOutput> OneService<T, NextOutput> join(ToOne<T, NextOutput> toOne) {
-		return new SimpleOneServiceImpl<T, NextOutput>(toOne);
-	}
-
-	@Override
-	public <NextOutput> OneService<T, NextOutput> join(OneService<T, NextOutput> toOne) {
-		return new SimpleOneServiceImpl<T, NextOutput>(toOne);
-	}
 }

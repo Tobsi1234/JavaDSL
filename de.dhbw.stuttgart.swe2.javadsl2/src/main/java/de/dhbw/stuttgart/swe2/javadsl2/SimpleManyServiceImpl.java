@@ -41,10 +41,6 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 		return "select " + selectEntityName + " from " + this.getObj1() + " join " + this.getJoinObjekte().get(0);
 	}
 
-	@Override
-	public <NextOutput> ManyService<Input, NextOutput> join(ManyService<Output, NextOutput> toMany) {
-		return new BridgingManyServiceImpl<Input, Output, NextOutput>(this, toMany);
-	}
 
 	@Override
 	public <NextOutput> ManyService<Input, NextOutput> join(ToMany<Output, NextOutput> toMany) {

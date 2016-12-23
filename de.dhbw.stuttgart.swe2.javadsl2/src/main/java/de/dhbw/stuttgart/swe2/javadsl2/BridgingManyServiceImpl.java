@@ -24,11 +24,7 @@ public class BridgingManyServiceImpl<Input, Bridged, Output> implements ManyServ
 		this.second = new SimpleManyServiceImpl<Bridged, Output>(second);
 	}
 
-	@Override
-	public <NextOutput> ManyService<Input, NextOutput> join(ManyService<Output, NextOutput> toMany) {
-		return new BridgingManyServiceImpl<Input, Output, NextOutput>(this, toMany);
-	}
-
+	
 	@Override
 	public <NextOutput> ManyService<Input, NextOutput> join(ToMany<Output, NextOutput> toMany) {
 		this.joinObjekte.add(this.joinKeys.get(joinKeys.size() -1) + "." + toMany.getEntityName() + " " + toMany.getEntityKey()); 
