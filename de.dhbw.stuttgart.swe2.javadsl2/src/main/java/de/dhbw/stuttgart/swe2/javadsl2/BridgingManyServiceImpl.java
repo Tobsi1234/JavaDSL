@@ -166,4 +166,16 @@ public class BridgingManyServiceImpl<Input, Bridged, Output> implements ManyServ
 		return null;
 	}
 
+	@Override
+	public ToMany<Input, Output> lower(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ToMany<Input, Output> upper(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -2,7 +2,11 @@ package de.dhbw.stuttgart.swe2.bibliothek.jpa.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -52,7 +56,7 @@ public class PersistenceTest {
 	}
 	
 	@Test
-	public void testBib() {
+	public void testBib() throws ParseException {
 		// Objekte erstellen
 		MitarbeiterJPA ma = new MitarbeiterJPA();
 		List<Mitarbeiter> mas = new ArrayList<>();
@@ -106,6 +110,10 @@ public class PersistenceTest {
 		ausleihObj.setAusleihinfos(ausleihInfos);
 		ausleihObj.setObjektinformation(objInfo);
 		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		Date ausleihdatum = df.parse("2016-01-01 12:00:00.123");
+
+		ausleihInfo.setAusleihdatum(ausleihdatum);
 		ausleihInfo.setAusleihobjekt(ausleihObj);
 		ausleihInfo.setKunde(kunde);
 		ausleihInfo.setMitarbeiter(ma);

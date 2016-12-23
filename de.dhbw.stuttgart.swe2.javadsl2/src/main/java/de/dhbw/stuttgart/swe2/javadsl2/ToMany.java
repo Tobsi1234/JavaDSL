@@ -22,6 +22,10 @@ public interface ToMany<Input, Output> {
 
 	ToMany<Input, Output> equals(String value);
 	
+	ToMany<Input, Output> lower(String value);
+
+	ToMany<Input, Output> upper(String value);
+	
 	String getAttribute();
 	
 	String getOperator();

@@ -115,6 +115,18 @@ public class DslTest {
 			return null;
 		}
 
+		@Override
+		public ToMany<BibliothekJPA, AusleihobjektJPA> lower(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<BibliothekJPA, AusleihobjektJPA> upper(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	}
 	
 	//Ausleihobjekt zu Ausleihinfo
@@ -173,6 +185,18 @@ public class DslTest {
 
 		@Override
 		public String getAttribute() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, AusleihinformationJPA> lower(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, AusleihinformationJPA> upper(String value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -239,6 +263,18 @@ public class DslTest {
 			return null;
 		}
 
+		@Override
+		public ToMany<AusleihobjektJPA, ObjektinformationJPA> lower(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihobjektJPA, ObjektinformationJPA> upper(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	}
 	
 	//Ausleihinfo zu Mitarbeiter
@@ -297,6 +333,18 @@ public class DslTest {
 
 		@Override
 		public String getAttribute() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, MitarbeiterJPA> lower(String value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, MitarbeiterJPA> upper(String value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -373,6 +421,20 @@ public class DslTest {
 		public String getValue() {
 			return value;
 		}
+
+		@Override
+		public ToMany<MitarbeiterJPA, MitarbeiterJPA> lower(String value) {
+			this.operator = "<";
+			this.value = value;
+			return this;
+		}
+
+		@Override
+		public ToMany<MitarbeiterJPA, MitarbeiterJPA> upper(String value) {
+			this.operator = ">";
+			this.value = value;
+			return this;
+		}
 	}
 	
 	//filter Ausleihinfo
@@ -444,6 +506,20 @@ public class DslTest {
 		@Override
 		public String getValue() {
 			return value;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, AusleihinformationJPA> lower(String value) {
+			this.operator = "<";
+			this.value = value;
+			return this;
+		}
+
+		@Override
+		public ToMany<AusleihinformationJPA, AusleihinformationJPA> upper(String value) {
+			this.operator = ">";
+			this.value = value;
+			return this;
 		}
 	}
 
@@ -518,6 +594,20 @@ public class DslTest {
 			return value;
 		}
 
+		@Override
+		public ToMany<BibliothekJPA, BibliothekJPA> lower(String value) {
+			this.operator = "<";
+			this.value = value;
+			return this;
+		}
+
+		@Override
+		public ToMany<BibliothekJPA, BibliothekJPA> upper(String value) {
+			this.operator = ">";
+			this.value = value;
+			return this;
+		}
+
 	}
 	
 	
@@ -559,7 +649,7 @@ public class DslTest {
 
 	@Test
 	public void test() {
-		String jpaStmt = from(BibliothekJPA.class).filter(filterBibliothek().attribute("name").equals("Stadtbib")).join(ausleihobjekte()).join(ausleihinfos()).filter(filterAusleihinfo().attribute("ausleihdatum").equals("max2")).join(mitarbeiter()).filter(filterMitarbeiter().attribute("name").equals("Max")).get(Select.BIBLIOTHEK);
+		String jpaStmt = from(BibliothekJPA.class).filter(filterBibliothek().attribute("name").equals("Stadtbibliothek")).join(ausleihobjekte()).join(ausleihinfos()).filter(filterAusleihinfo().attribute("ausleihdatum").upper("1")).join(mitarbeiter()).filter(filterMitarbeiter().attribute("name").equals("Max")).get(Select.AUSLEIHINFORMATION);
 		//String jpaStmt = from(BibliothekJPA.class).filter(filterBibliothek().attribute("name").equals("Stadtbib")).join(ausleihobjekte()).join(ausleihinfos()).join(mitarbeiter()).filter(filterMitarbeiter().attribute("name").equals("Max")).get(Select.BIBLIOTHEK);
 
 		//String jpaStmt2 = from(BibliothekJPA.class).join(ausleihobjekte()).join(objektinfo()).get();
