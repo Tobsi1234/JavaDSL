@@ -12,8 +12,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
-	<classpathentry kind="lib" path="/Users/Tobias/Downloads/jar/org.hibernate/hibernate-core/5.2.4.Final/440725374575de2319da40115c8879010be7b519/hibernate-core-5.2.4.Final-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/Tobias/Downloads/jar/javax.annotation/jsr250-api/1.0/5025422767732a1ab45d93abfea846513d742dcf/jsr250-api-1.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Tobias/Downloads/jar/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0.Final/5e731d961297e5a07290bfaf3db1fbc8bbbf405a/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="/de.dhbw.stuttgart.swe2.javadsl2.bibliothek/lib/hibernate-core-5.2.3.Final.jar"/>
+	<classpathentry kind="lib" path="/de.dhbw.stuttgart.swe2.javadsl2.bibliothek/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="/de.dhbw.stuttgart.swe2.javadsl2.bibliothek/lib/jsr250-api-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
